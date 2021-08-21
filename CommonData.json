@@ -296,5 +296,73 @@
                                                                  "type": "integer"
                                                       } ]
                                   }
+                },
+        "Time": {
+                    "TIME_START_HIGH": {
+                                      "category": "Time",
+                                  "control_type": "display",
+                                   "description": "Start time high bits in seconds",
+                                    "identifier": "TIME_START_HIGH",
+                                        "inputs": [  ],
+                                       "outputs": [ {
+                                                          "address": 1092,
+                                                      "description": "Start time high bits in seconds",
+                                                             "mask": 65535,
+                                                        "max_value": 65535,
+                                                         "shift_by": 0,
+                                                           "suffix": "",
+                                                             "type": "integer"
+                                                  } ]
+                              },
+                    "TIME_START_LOW": {
+                                      "category": "Time",
+                                  "control_type": "display",
+                                   "description": "Start time low bits in seconds",
+                                    "identifier": "TIME_START_LOW",
+                                        "inputs": [  ],
+                                       "outputs": [ {
+                                                          "address": 1094,
+                                                      "description": "Start time low bits in seconds",
+                                                             "mask": 65535,
+                                                        "max_value": 65535,
+                                                         "shift_by": 0,
+                                                           "suffix": "",
+                                                             "type": "integer"
+                                                  } ]
+                              },
+
+                    "TIME_MODEL_HIGH": {
+                                      "category": "Time",
+                                  "control_type": "display",
+                                   "description": "Model time high bits in hundredth of a second",
+                                    "identifier": "TIME_MODEL_HIGH",
+                                        "inputs": [  ],
+                                       "outputs": [ {
+                                                          "address": 1096,
+                                                      "description": "Model time high bits in hundredth of a second",
+                                                             "mask": 65535,
+                                                        "max_value": 65535,
+                                                         "shift_by": 0,
+                                                           "suffix": "",
+                                                             "type": "integer"
+                                                  } ]
+                              },
+                    "TIME_MODEL_LOW": {
+                                      "category": "Time",
+                                  "control_type": "display",
+                                   "description": "Model time low bits in hundredth of a second",
+                                    "identifier": "TIME_MODEL_LOW",
+                                        "inputs": [  ],
+                                       "outputs": [ {
+                                                          "address": 1098,
+                                                      "description": "Model Time low bits in hundredth of a second",
+                                                             "mask": 65535,
+                                                        "max_value": 65535,
+                                                         "shift_by": 0,
+                                                           "suffix": "",
+                                                             "type": "integer"
+                                                  } ]
+                              }
+
                 }
 }
