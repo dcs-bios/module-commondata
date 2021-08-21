@@ -12,6 +12,10 @@ local altFt = 0
 local hdgDeg
 local hdgDegFrac = 0
 local iasDisp
+local startTimeLow = 0
+local startTimeHigh = 0
+local modTimeLow = 0
+local modTimeHigh = 0
 
 moduleBeingDefined.exportHooks[#moduleBeingDefined.exportHooks+1] = function()
 	-- skip  this data if ownship export is disabled
@@ -20,11 +24,17 @@ moduleBeingDefined.exportHooks[#moduleBeingDefined.exportHooks+1] = function()
 	playerName = LoGetPilotName()
 		if playerName == nil then playerName = "XXX" end
 	
-	misstime = string.format(LoGetMissionStartTime())
-		if misstime == nil then misstime = "0" end
-		
-	modtime = string.format("%5.0f", LoGetModelTime())
-		if modtime == nil then modtime = "0" end
+	
+	local startTime = LoGetMissionStartTime() or 0
+	misstime = string.format(startTime)
+	startTimeLow = startTime%65536
+	startTimeHigh = (startTime - startTimeLow)/65536
+	
+	local modTimeFloat = LoGetModelTime() or 0	
+	modtime = string.format("%5.0f", modTimeFloat)
+	local modTimeHundredth = math.floor (modTimeFloat*100)
+	modTimeLow = modTimeHundredth%65536
+	modTimeHigh = (modTimeHundredth - modTimeLow) / 65536
 			
 	iasDisp = LoGetIndicatedAirSpeed()
 		if iasDisp == nil then iasDisp = "0000" end
@@ -124,5 +134,10 @@ end, 127, "Heading", "Heading (Fractional Degrees, divide by 127)")
 
 defineString("MISS_TIME",  misstime, 5, "Metadata", "Mission Start Time")
 defineString("MOD_TIME", function() return modtime or "00000" end, 5, "Metadata", "Model Time in sec")
+
+defineIntegerFromGetter("TIME_START_HIGH", function() return startTimeHigh end, 65535, "Time", "Start time high bits in seconds")
+defineIntegerFromGetter("TIME_START_LOW", function() return startTimeLow end, 65535, "Time", "Start time low bits in seconds")
+defineIntegerFromGetter("TIME_MODEL_HIGH", function() return modTimeHigh end, 65535, "Time", "Model time high bits in hundredth of a second")
+defineIntegerFromGetter("TIME_MODEL_LOW", function() return modTimeLow end, 65535, "Time", "Model time low bits in hundredth of a second")
 
 BIOS.protocol.endModule()
